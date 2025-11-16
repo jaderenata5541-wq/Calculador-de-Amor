@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Calculadora de Amor – Calculardeamor.com</title>
+<meta name="description" content="Calculadora de Amor gratis. Ingresa dos nombres y descubre tu porcentaje de compatibilidad.">
+<style>
+    body { font-family: Arial, sans-serif; padding: 20px; max-width: 700px; margin: auto; }
+    .box { padding: 20px; border: 1px solid #ddd; border-radius: 10px; }
+    input { padding: 10px; width: 100%; margin-bottom: 10px; }
+    button { padding: 10px 20px; cursor: pointer; }
+    #result { font-size: 22px; margin-top: 20px; font-weight: bold; }
+</style>
+</head>
+<body>
+
+<h1>Calculadora de Amor ❤️</h1>
+
+<p>
+Bienvenido a una versión ligera del <strong>Calculador de Amor</strong>.  
+Si quieres usar la herramienta completa visita el sitio oficial:
+</p>
+
+<p><a href="https://calculardeamor.com" target="_blank">👉 Calculardeamor.com (Sitio Oficial)</a></p>
+
+<div class="box">
+    <h2>Prueba tu compatibilidad</h2>
+    <input type="text" id="name1" placeholder="Tu nombre">
+    <input type="text" id="name2" placeholder="Nombre de tu pareja">
+    <button onclick="calcLove()">Calcular Amor ❤️</button>
+
+    <div id="result"></div>
+</div>
+
+<script>
+function calcLove() {
+    let n1 = document.getElementById("name1").value;
+    let n2 = document.getElementById("name2").value;
+
+    if(n1 === "" || n2 === "") {
+        document.getElementById("result").innerHTML = "Por favor ingresa ambos nombres.";
+        return;
+    }
+
+    let score = Math.floor(Math.random() * 101);
+    document.getElementById("result").innerHTML = 
+        "Compatibilidad entre " + n1 + " ❤️ " + n2 + " = " + score + "%";
+}
+</script>
+
+<hr>
+
+<h2>About This Page</h2>
+<p>
+This page is hosted on GitLab Pages as a lightweight version of the love calculator.  
+It exists for educational purposes and to offer an alternative mini-tool.
+</p>
+
+<p>
+GitLab Repository URL:<br>
+<a href="" target="_blank">Your GitLab Repo Link</a>
+</p>
+
+</body>
+</html>
