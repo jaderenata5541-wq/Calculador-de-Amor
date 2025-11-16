@@ -1,65 +1,227 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<title>Calculadora de Amor – Calculardeamor.com</title>
-<meta name="description" content="Calculadora de Amor gratis. Ingresa dos nombres y descubre tu porcentaje de compatibilidad.">
-<style>
-    body { font-family: Arial, sans-serif; padding: 20px; max-width: 700px; margin: auto; }
-    .box { padding: 20px; border: 1px solid #ddd; border-radius: 10px; }
-    input { padding: 10px; width: 100%; margin-bottom: 10px; }
-    button { padding: 10px 20px; cursor: pointer; }
-    #result { font-size: 22px; margin-top: 20px; font-weight: bold; }
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Calculadora de Amor — calculardeamor.com</title>
+  <meta name="description" content="Calculadora de Amor - calcula la compatibilidad entre dos nombres. Herramienta divertida y gratuita en calculardeamor.com." />
+  <meta name="keywords" content="calculadora de amor, love calculator, compatibilidad, nombres, calculardeamor" />
+  <link rel="canonical" href="https://calculardeamor.com/">
+
+  <!-- Simple, modern styles -->
+  <style>
+    :root{
+      --bg:#fff7fb;
+      --card:#ffffff;
+      --accent:#ff4d6d;
+      --muted:#6b7280;
+      --radius:14px;
+      --max:920px;
+      --shadow: 0 6px 22px rgba(16,24,40,0.08);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: linear-gradient(180deg,#fff #fff7fb 40%);
+      color:#111827;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      padding:28px;
+      display:flex;
+      justify-content:center;
+      min-height:100vh;
+    }
+    .wrap{width:100%;max-width:var(--max);}
+    header{
+      display:flex;gap:16px;align-items:center;margin-bottom:20px;
+    }
+    .brand{
+      width:72px;height:72px;border-radius:12px;background:linear-gradient(135deg,#ffdfe6,#fff);display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--accent);
+      box-shadow: var(--shadow);
+      font-size:28px;
+    }
+    h1{margin:0;font-size:28px}
+    .lead{color:var(--muted);margin-top:6px}
+
+    .grid{display:grid;grid-template-columns:1fr 360px;gap:20px;align-items:start;}
+    @media (max-width:880px){ .grid{grid-template-columns:1fr} }
+
+    .card{background:var(--card);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow);}
+    .calc h2{margin-top:0;}
+    label{display:block;margin-top:12px;font-weight:600;color:#111827}
+    input[type="text"]{width:100%;padding:12px;border-radius:10px;border:1px solid #e6e6e9;font-size:15px;margin-top:6px}
+    button.primary{display:inline-block;margin-top:12px;padding:10px 14px;border-radius:10px;border:0;background:linear-gradient(90deg,var(--accent),#ff7a99);color:#fff;font-weight:700;cursor:pointer;box-shadow:0 6px 18px rgba(255,77,109,0.18)}
+    .result{margin-top:14px;padding:12px;border-radius:10px;background:linear-gradient(180deg,#fff,#fff1f4);border:1px solid rgba(255,77,109,0.08)}
+    .score{font-size:26px;font-weight:800;color:var(--accent)}
+    .muted{color:var(--muted);font-size:14px}
+
+    aside .card{position:sticky;top:24px}
+    .links a{display:inline-block;margin-right:10px;color:var(--accent);text-decoration:none;font-weight:600}
+    footer{margin-top:22px;color:var(--muted);font-size:13px}
+    .small{font-size:13px;color:var(--muted)}
+    .badge{display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(255,77,109,0.08);color:var(--accent);font-weight:700;margin-right:8px}
+  </style>
 </head>
 <body>
+  <div class="wrap">
+    <header>
+      <div class="brand">💗</div>
+      <div>
+        <h1>Calculadora de Amor</h1>
+        <div class="lead">A fun love compatibility calculator — demo for <a href="https://calculardeamor.com" style="color:var(--accent);text-decoration:none" target="_blank">calculardeamor.com</a></div>
+      </div>
+    </header>
 
-<h1>Calculadora de Amor ❤️</h1>
+    <div class="grid">
+      <!-- Main content -->
+      <main>
+        <section class="card calc" aria-labelledby="calc-title">
+          <h2 id="calc-title">Try the love calculator</h2>
+          <p class="small">Enter two names and click calculate. This demo uses a playful deterministic algorithm — for fun only.</p>
 
-<p>
-Bienvenido a una versión ligera del <strong>Calculador de Amor</strong>.  
-Si quieres usar la herramienta completa visita el sitio oficial:
-</p>
+          <label for="n1">Name 1</label>
+          <input id="n1" type="text" placeholder="e.g. Ana">
 
-<p><a href="https://calculardeamor.com" target="_blank">👉 Calculardeamor.com (Sitio Oficial)</a></p>
+          <label for="n2">Name 2</label>
+          <input id="n2" type="text" placeholder="e.g. Carlos">
 
-<div class="box">
-    <h2>Prueba tu compatibilidad</h2>
-    <input type="text" id="name1" placeholder="Tu nombre">
-    <input type="text" id="name2" placeholder="Nombre de tu pareja">
-    <button onclick="calcLove()">Calcular Amor ❤️</button>
+          <div>
+            <button class="primary" id="btn">Calculate compatibility</button>
+            <button id="btn-random" style="margin-left:8px;padding:10px 12px;border-radius:10px;border:1px solid #eee;background:#fff;cursor:pointer">Random</button>
+          </div>
 
-    <div id="result"></div>
-</div>
+          <div id="result" class="result" style="display:none;">
+            <div class="score" id="scoreValue"></div>
+            <div id="scoreMsg" class="muted"></div>
+            <div style="margin-top:10px">
+              <a id="visitSite" href="https://calculardeamor.com" target="_blank" style="color:var(--accent);font-weight:700">Open full calculator on calculardeamor.com →</a>
+            </div>
+          </div>
 
-<script>
-function calcLove() {
-    let n1 = document.getElementById("name1").value;
-    let n2 = document.getElementById("name2").value;
+          <div style="margin-top:16px" class="small">
+            Tip: share the generated URL with others — the full site supports sharing and social previews.
+          </div>
+        </section>
 
-    if(n1 === "" || n2 === "") {
-        document.getElementById("result").innerHTML = "Por favor ingresa ambos nombres.";
-        return;
+        <section style="margin-top:18px" class="card">
+          <h3>About this project</h3>
+          <p class="muted">
+            This GitLab Pages demo shows a compact love calculator widget and links to the full, production-ready tool at <a href="https://calculardeamor.com" target="_blank" style="color:var(--accent)">calculardeamor.com</a>.
+            The live site includes localized Spanish UI, sharing features, and additional relationship tools.
+          </p>
+
+          <h4 style="margin-top:12px">Why this exists</h4>
+          <p class="muted">Pages like this are useful for indexing, quick demos, and giving search engines an additional authoritative reference pointing to the main product.</p>
+
+          <h4 style="margin-top:12px">Note</h4>
+          <p class="muted">This calculator is for entertainment only — results are not scientific.</p>
+        </section>
+      </main>
+
+      <!-- Sidebar -->
+      <aside>
+        <div class="card">
+          <div style="display:flex;align-items:center;justify-content:space-between">
+            <div>
+              <div class="badge">Demo</div>
+              <div style="font-weight:700;margin-top:8px">calculardeamor.com</div>
+            </div>
+            <div style="text-align:right">
+              <div class="small">Repo</div>
+              <div style="margin-top:6px"><a href="https://gitlab.com/YOUR-USERNAME/YOUR-REPO" target="_blank" style="color:var(--accent);font-weight:700">gitlab.com/YOUR-USERNAME/YOUR-REPO</a></div>
+            </div>
+          </div>
+
+          <hr style="margin:16px 0">
+          <div class="links">
+            <a href="https://calculardeamor.com" target="_blank">Visit site</a>
+            <a href="https://calculardeamor.com/calculadora-de-amor/" target="_blank">Full calculator</a>
+          </div>
+
+          <div style="margin-top:12px" class="small">
+            Want the full tool? Click the link above to open the production version on calculardeamor.com.
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <footer>
+      <div class="small" style="margin-top:18px">
+        This demo is hosted on GitLab Pages. Repository: 
+        <a href="https://gitlab.com/YOUR-USERNAME/YOUR-REPO" target="_blank">gitlab.com/YOUR-USERNAME/YOUR-REPO</a> · Live site: 
+        <a href="https://calculardeamor.com" target="_blank">calculardeamor.com</a>
+      </div>
+    </footer>
+  </div>
+
+  <!-- JavaScript: deterministic but fun algorithm + permalink -->
+  <script>
+    function normalize(s){ return (s||'').toString().trim().toLowerCase().replace(/[^a-z0-9\u00C0-\u017F]/g,''); }
+    function computeScore(a,b){
+      a = normalize(a); b = normalize(b);
+      if(!a || !b) return null;
+      var combo = a + '♥' + b;
+      // deterministic seed from char codes
+      var seed = 0;
+      for(var i=0;i<combo.length;i++){
+        seed = (seed * 31 + combo.charCodeAt(i)) >>> 0;
+      }
+      var score = (seed % 101);
+      return score;
+    }
+    function getMessage(score){
+      if(score >= 90) return "Perfect match — sparks everywhere ✨";
+      if(score >= 75) return "Great match — strong chemistry ❤️";
+      if(score >= 50) return "Good match — potential to grow 🌷";
+      if(score >= 30) return "It may need work — personality differences ⚖️";
+      return "Low match — keep it fun 😉";
     }
 
-    let score = Math.floor(Math.random() * 101);
-    document.getElementById("result").innerHTML = 
-        "Compatibilidad entre " + n1 + " ❤️ " + n2 + " = " + score + "%";
-}
-</script>
+    var btn = document.getElementById('btn');
+    var btnRandom = document.getElementById('btn-random');
 
-<hr>
+    function showResult(n1,n2){
+      var score = computeScore(n1,n2);
+      var resultEl = document.getElementById('result');
+      if(score === null){
+        resultEl.style.display = 'block';
+        document.getElementById('scoreValue').textContent = '';
+        document.getElementById('scoreMsg').textContent = 'Please enter both names.';
+        return;
+      }
+      document.getElementById('scoreValue').textContent = score + '% compatibility';
+      document.getElementById('scoreMsg').textContent = getMessage(score);
+      resultEl.style.display = 'block';
 
-<h2>About This Page</h2>
-<p>
-This page is hosted on GitLab Pages as a lightweight version of the love calculator.  
-It exists for educational purposes and to offer an alternative mini-tool.
-</p>
+      // Build permalink to main site so users can open the full tool with same params
+      var q = '?n1=' + encodeURIComponent(n1) + '&n2=' + encodeURIComponent(n2) + '&s=' + score;
+      document.getElementById('visitSite').href = 'https://calculardeamor.com' + q;
+    }
 
-<p>
-GitLab Repository URL:<br>
-<a href="" target="_blank">Your GitLab Repo Link</a>
-</p>
+    btn.addEventListener('click', function(){
+      var n1 = document.getElementById('n1').value;
+      var n2 = document.getElementById('n2').value;
+      showResult(n1,n2);
+    });
+    btnRandom.addEventListener('click', function(){
+      var names = ['Ana','Carlos','Lucia','Diego','Sofia','Mateo','Valeria','Luis'];
+      var a = names[Math.floor(Math.random()*names.length)];
+      var b = names[Math.floor(Math.random()*names.length)];
+      document.getElementById('n1').value = a;
+      document.getElementById('n2').value = b;
+      showResult(a,b);
+    });
 
+    // Prefill if query present
+    (function prefill(){
+      var params = new URLSearchParams(location.search);
+      if(params.has('n1')) document.getElementById('n1').value = params.get('n1');
+      if(params.has('n2')) document.getElementById('n2').value = params.get('n2');
+      if(document.getElementById('n1').value && document.getElementById('n2').value){
+        showResult(document.getElementById('n1').value, document.getElementById('n2').value);
+      }
+    })();
+  </script>
 </body>
 </html>
