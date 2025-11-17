@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Calculador de Amor — calculardeamor.com</title>
+  <meta name="description" content="Calculadora de Amor - calcula la compatibilidad entre dos nombres. Demo para calculardeamor.com." />
+  <style>
+    body{font-family:Arial,Helvetica,sans-serif;background:#f7f7fb;color:#222;margin:0;padding:24px}
+    .wrap{max-width:900px;margin:0 auto}
+    header{display:flex;align-items:center;gap:12px}
+    h1{color:#e91e63;margin:0}
+    .lead{color:#666;margin-top:6px}
+    .card{background:#fff;padding:20px;border-radius:12px;box-shadow:0 6px 20px rgba(16,24,40,0.06);margin-top:18px}
+    input,button{width:100%;padding:12px;border-radius:10px;border:1px solid #e6e6e9;margin-top:10px}
+    button{background:#e91e63;color:#fff;border:0;font-weight:700;cursor:pointer}
+    #result{margin-top:14px;color:#e91e63;font-weight:700;text-align:center}
+    a{color:#e91e63;text-decoration:none}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div style="width:64px;height:64px;border-radius:12px;background:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 18px rgba(0,0,0,0.04);font-size:28px">💘</div>
+      <div>
+        <h1>Calculador de Amor — Demo</h1>
+        <div class="lead">Demo para <a href="https://calculardeamor.com" target="_blank">calculardeamor.com</a></div>
+      </div>
+    </header>
+
+    <div class="card">
+      <h2>Probar la calculadora</h2>
+      <input id="name1" placeholder="Tu nombre"/>
+      <input id="name2" placeholder="Nombre de la pareja"/>
+      <button onclick="calcLove()">Calcular compatibilidad ❤️</button>
+      <div id="result"></div>
+    </div>
+
+    <div class="card" style="margin-top:14px">
+      <h3>Sobre este proyecto</h3>
+      <p>Versión demo. La herramienta completa con más funciones está en <a href="https://calculardeamor.com" target="_blank">calculardeamor.com</a>.</p>
+      <p>Repositorio: <a href="https://github.com/jaderenata5541-wq/Calculador-de-Amor" target="_blank">github.com/jaderenata5541-wq/Calculador-de-Amor</a></p>
+    </div>
+  </div>
+
+<script>
+function calcLove(){
+  var n1 = (document.getElementById('name1').value||'').trim();
+  var n2 = (document.getElementById('name2').value||'').trim();
+  if(!n1 || !n2){ document.getElementById('result').innerText='Por favor ingresa ambos nombres.'; return; }
+  var perc = Math.floor(Math.random()*41)+60;
+  document.getElementById('result').innerHTML = 'Compatibilidad entre <b>'+escapeHtml(n1)+'</b> y <b>'+escapeHtml(n2)+'</b>: '+perc+'%';
+}
+function escapeHtml(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+</script>
+</body>
+</html>
